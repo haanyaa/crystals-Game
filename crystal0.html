@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+body {
+    background-color: whiteß;
+
+}
+#head {
+ /*   background-color: burlywood;*/
+    margin-bottom: 10px;
+    font-family: cursive;
+    text-align: center;
+
+}
+
+
+#score {
+
+    background-color: lightseagreen;
+    width: 20%;
+    height: 40;
+}
+#rg {
+    height: 50%;
+}
+
+
+.crystal-image{
+     width: 300px;
+      height: 300px;
+}
+.img-responsive {
+margin-bottom: 10px;
+width: 200px;
+height: 300px;
+}
+
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm-3" id="head">
+            <h1 id="collector"> Crystal Collector ! </h1>
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="container">
+    <div class="row">
+
+        <div class="col-xl-3" id="head">
+            <p id="collectors"> You will be given a random number at the start of the game,
+                There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score.
+                 
+                 You win the game by matching your total score to random number,you lose the game if your score gets above the random number.
+
+                 The value of each crystals is hidden from you until you click on it.
+
+                 Each time when the game starts,the game will change the value of each crystal.
+                  </p>
+    </div>
+    </div>
+    </div>
+<div class="container" id="rg">
+    <div class="row">
+        <div class="col-xl-3">
+<p id="score">   </p>
+
+        </div>
+
+        <div class="col-xl-3">
+
+
+
+
+        </div>
+
+
+
+
+</div>
+</div>
+ 
+ <div class="container">
+<div class="row">
+<div class="col-xs-3" id="redCrystal"> <img class="img-responsive" src="http://4.bp.blogspot.com/-5m9YFiawdMQ/UVi0OcEm5-I/AAAAAAAAMPk/U1qF6U07DYY/s1600/grena_tasi.jpg"> </div>
+<div class="col-xs-3" id="blueCrystal"> <img  class="img-responsive" src="http://rs944.pbsrc.com/albums/ad282/Lwna/Gems/ChristiesYellowDiamondGemstone.png~c200"> </div>
+<div class="col-xs-3" id="yellowCrystal"> <img  class="img-responsive" src="https://s-media-cache-ak0.pinimg.com/236x/d2/15/39/d215393df94e43f75ba2700b77c2ef75.jpg"> </div>
+<div class="col-xs-3" id="greenCrystal"> <img  class="img-responsive" src="http://pic4.55jia.net/jiafangshuagou/29/a262598.png"> </div>
+
+
+</div>
+
+ </div>
+ 	<div>Your Score:<span id="user_score"></span></div>
+		</div>
+
+        <div>wins:<span id="user_score1"></span></div>
+		</div>
+
+        <div>Losses:<span id="user_score2"></span></div>
+		</div>
+ 
+
+
+ <div class=".crystal-image">
+        
+ <script>   
+    
+
+$(document).ready(function(){
+    var targetNumber = 34;
+
+    $("#score").text("Targeted Number :" + targetNumber);
+     
+
+var userScore = 0;
+var wins = 0;
+var losses = 0;
+var crsytal1 = 0;
+var crsytal2 = 0;
+var crsytal3 = 0;
+var crsytal4 = 0;
+
+			var roundStart = function(){
+
+crsytal1 = Math.floor((Math.random() * 12) + 1);
+crsytal2 = Math.floor((Math.random() * 12) + 1);
+crsytal3 = Math.floor((Math.random() * 12) + 1);
+crsytal4 = Math.floor((Math.random() * 12) + 1);
+
+
+userScore = 0;
+
+$("#user_score").text(" " + userScore);
+
+console.log(crsytal1);
+console.log(crsytal2);
+console.log(crsytal3);
+console.log(crsytal4);
+
+
+            };
+
+            roundStart();
+
+           
+			$("#redCrystal").click(function(){
+				userScore = userScore + crsytal1;
+				$("#user_score").text(" " + userScore);
+                compare();
+
+               
+			});
+
+			$("#blueCrystal").click(function(){
+				userScore = userScore + crsytal2;
+				$("#user_score").text(" " + userScore);
+				compare();
+			});
+
+			$("#yellowCrystal").click(function(){
+				userScore = userScore + crsytal3;
+				$("#user_score").text(" " + userScore);
+				compare();
+			});
+
+			$("#greenCrystal").click(function(){
+				userScore = userScore + crsytal4;
+				$("#user_score").text(" " + userScore);
+				compare();
+			});
+				
+		
+
+	
+			var compare = function(){
+    			if(userScore > targetNumber){
+    				alert("Sorry, you lost.");
+    				losses = losses + 1
+    				$("#user_score2").text(losses);
+    				roundStart();
+    				
+    			}
+    			if (userScore === targetNumber){
+    				alert("WINNER!");
+    				wins = wins + 1
+    				$("#user_score1").text(wins);
+    				roundStart();
+    			}	
+    		};
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+        
+          
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </script>
+    </div> 
+</body>
+</html>
